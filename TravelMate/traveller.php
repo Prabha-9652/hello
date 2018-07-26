@@ -15,14 +15,14 @@ if(empty($t)){
 	echo"Enter time";	
 }
 else{
-	$query="Select name,vnum,time,email,start from `rider` where time>=$t order by time;";
+	$query="Select name,vnum,time,start from `rider` where time>=$t order by time;";
 	$result=mysqli_query($conn,$query);
 	if($result){
 		echo"<table id='table_test' cellspacing='0'>";
-		echo"<tr><th>Name</th><th>Veh_num</th><th>Time</th><th>Email</th><th>Source</th></tr>";
+		echo"<tr><th>Name</th><th>Veh_num</th><th>Time</th><th>Source</th></tr>";
 	while($details=mysqli_fetch_array($result,MYSQLI_NUM)){
 		echo"<tr>";
-		echo "<td>".$details['0']." </td><td>".$details['1']." </td><td>".$details['2']." </td><td>".$details['3']." </td><td>".$details['4']."</td>";
+		echo "<td>".$details['0']." </td><td>".$details['1']." </td><td>".$details['2']." </td><td>".$details['3']." </td>";
 		echo"</tr>";
 		echo"<br>";
 		 
@@ -56,8 +56,7 @@ else{
 		document.getElementById("name").innerHTML =  '<strong>'+"Name: "+'</strong>'+output[0];
 		document.getElementById("vnum").innerHTML = '<strong>'+"Vehicle Number: "+'</strong>'+output[1];
 		document.getElementById("time").innerHTML = '<strong>'+"Time to Reach: "+'</strong>'+output[2];
-		document.getElementById("email").innerHTML = '<strong>'+"e-mail: "+'</strong>'+output[3];
-		document.getElementById("start").innerHTML = '<strong>'+"Strart Location: "+'</strong>'+output[4];
+		document.getElementById("start").innerHTML = '<strong>'+"Strart Location: "+'</strong>'+output[3];
 		$("#confirm").attr("disabled",false);
 	});
   });
@@ -101,7 +100,8 @@ background: #4b6faa;
 	<p id="name"></p>
 <p id="vnum"></p>
 <p id="time"></p>
-<p id="email"></p><p id="start"></p>
-<a href="confirm.php"><button id="confirm" type="confirm" value="confirm" disabled>Confirm</button></a>
+<p id="start"></p>
+<h6>Remember your mates vehicle number</h6>
+<a href="confirm.html"><button id="confirm" type="confirm" value="confirm" action="" disabled>Confirm</button></a>
 </body>
 </html>

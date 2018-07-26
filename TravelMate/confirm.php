@@ -1,41 +1,39 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Confirm</title>
-<!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-<style>
-.form-inp{
-margin:0 auto;
-}
-</style>
-</head>
-<body>
-<div class="row">
-<div class="col s2"></div>
-    <form class="col s4 form-inp" method="POST" action="">
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="traveller" type="text" name="traveller" class="validate" required>
-          <label for="t">Enter your name:</label>
-
-        </div>
-      </div>
-	   <input class="btn waves-effect waves-light" type="submit" name="action" value="Connect">
-    
-  </button>
-    </form>
-	
-	<div class="col s3"></div>
-  </div>
-</body>
-</html>
 <?php
- 
-var_dump( mail( '8978485738@vtext.com', '', 'This was sent with PHP.' ) ); // bool(true)
-var_dump( mail( 'geedaprabhakarreddy@gmail.com', '', 'This was sent with PHP.' ) );
- 
+$conn=mysqli_connect("localhost","root","","travelmate");
+if(!$conn)
+	echo"data base problem".msqli_connect_error();
+
+if(isset($_POST['submit'])){
+	$veh=$_POST['vhnum'];
+	// echo"submit(t)";
+}
+else{
+	echo"Not Submit";
+}
+if(empty($veh)){
+	echo"Enter vehicle number:";	
+}
+else{
+	$query="Delete from `rider` where vnum LIKE '$veh'";
+	
+	$result=mysqli_query($conn,$query);
+	
+	if($result === true){
+		echo "Wait for your buddy";
+	}
+	else{
+		echo "Buddy you chose alredy hired. Kindly choose another one";
+	}
+	$q="Select * from `rider` where vnum like '$veh'";
+	$result1=mysqli_query($conn,$q);
+	if($result1-> num_rows > 0){
+		echo "result";
+		$details=mysqli_fetch_array($result1,MYSQLI_NUM);
+		echo $details['0'];
+	}
+	else {
+		echo "select not run ";
+	}
+	mysqli_close($conn);
+}	
 ?>
